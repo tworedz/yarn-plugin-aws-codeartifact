@@ -40,6 +40,9 @@ export const registryCommands: RegistryCommand[] = [
     positionalArgs: ['link']
   },
   {
+    positionalArgs: ['unlink']
+  },
+  {
     positionalArgs: ['npm', 'audit'],
     registryFn: () => PUBLISH_REGISTRY
   },
