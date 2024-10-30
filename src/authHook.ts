@@ -17,6 +17,7 @@ import {
 import { Codeartifact } from '@aws-sdk/client-codeartifact'
 import { defaultProvider } from '@aws-sdk/credential-provider-node'
 import { fromEnv } from '@aws-sdk/credential-provider-env'
+import {fromProcess} from '@aws-sdk/credential-provider-process'
 import { chain } from '@aws-sdk/property-provider'
 
 type TokenGenerator = (
@@ -186,7 +187,7 @@ const getAuthorizationToken = memoizePromise(
       })
 
       const credentials = miscUtils.parseOptionalBoolean(preferAwsEnvironmentCredentials)
-        ? chain(fromEnv(), _defaultProvider)
+        ? chain(fromEnv(), fromProcess(), _defaultProvider)
         : _defaultProvider
 
       const client = new Codeartifact({
